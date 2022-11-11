@@ -33,5 +33,11 @@ public class ProxyInvocationHanler implements InvocationHandler {
         UserService userServiceProxy = (UserService)Proxy.newProxyInstance(userService.getClass().getClassLoader(),
                 userService.getClass().getInterfaces(), invocationHanler);
         userServiceProxy.createUser();
+
+        EmployeeService employeeService = new EmployeeServiceImpl();
+        EmployeeService employeeServiceProxy = (EmployeeService)Proxy.newProxyInstance(employeeService.getClass().getClassLoader(),
+                employeeService.getClass().getInterfaces(),
+                new ProxyInvocationHanler(employeeService));
+        employeeService.createEmployee();
     }
 }
